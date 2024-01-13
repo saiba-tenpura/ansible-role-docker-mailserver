@@ -1,2 +1,23 @@
 ---
-# tasks file for saiba-tenpura.docker_mailserver
+- name: Setup install dir
+  file:
+    path: "{{ dms_install_dir }}"
+    state: directory
+
+- name: Download compose & env file
+  ansible.builtin.get_url:
+    url: "{{ dms_repo_url }}/{{ item }}"
+    dest: "{{ dms_install_dir }}"
+  loop:
+    - compose.yaml
+    - mailserver.env
+
+- name: Setup volume directories
+  ansible.builtin.file:
+    path: "{{ dms_install_dir }}/docker-data/dms/{{ item }}"
+    state: directory
+  loop:
+    - mail-data
+    - mail-state
+    - mail-logs
+    - config
