@@ -1,3 +1,6 @@
 ---
 dms_repo_url: https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master
 dms_install_dir: /srv/mail/
+dms_env_vars:
+  ENABLE_FAIL2BAN: 1
+  SPOOF_PROTECTION: 1

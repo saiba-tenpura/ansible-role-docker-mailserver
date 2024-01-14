@@ -24,3 +24,10 @@
     - mail-state
     - mail-logs
     - config
+
+- name: Configure mailserver.env
+  ansible.builtin.lineinfile:
+    path: "{{ dms_install_dir }}/mailserver.env"
+    regexp: "^{{ item.key }}=.*"
+    line: "{{ item.key }}={{ item.value }}"
+  loop: "{{ dms_env_vars | dict2items }}"

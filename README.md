@@ -6,10 +6,11 @@ Docker and the Compose plugin need to be already installed on the server. You co
 
 ## Role Variables
 Available variables are listed below, along with default values (see defaults/main.yml):
-| Variable        | Description                                                         | Default value                                                                |
-| --------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| dms_repo_url    | URL for **compose.yaml** & **mailserver.env** retrieval.            | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
-| dms_install_dir | Target directory for installation of files, configs, mail data etc. | /srv/mail                                                                    |
+| Variable        | Description                                                                                                                    | Default value                                                                |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| dms_repo_url    | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
+| dms_install_dir | Target directory for installation of files, configs, mail data etc.                                                            | /srv/mail                                                                    |
+| dms_env_vars    | Dict specifying config for [mailserver.env](https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/). | (see [defaults/main.yml](defaults/main.yml))                                 |
 
 ## Dependencies
 None.
@@ -17,8 +18,12 @@ None.
 ## Example Playbook
 ```
     - hosts: servers
+      vars:
+        dms_env_vars:
+          ENABLE_FAIL2BAN: 1
+          SPOOF_PROTECTION: 1
       roles:
-         - role: saiba-tenpura.docker-mailserver
+        - role: saiba-tenpura.docker-mailserver
 ```
 
 ## License
