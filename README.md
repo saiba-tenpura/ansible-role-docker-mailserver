@@ -2,10 +2,14 @@
 Installs a [docker mailserver](https://github.com/docker-mailserver/docker-mailserver) instance.
 
 ## Requirements
-Docker and the Compose plugin need to be installed on the server to actually be able to launch the instance
+Docker and the Compose plugin need to be already installed on the server. You could use [this](https://github.com/geerlingguy/ansible-role-docker) ansible role to do so.
 
 ## Role Variables
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Available variables are listed below, along with default values (see defaults/main.yml):
+| Variable        | Description                                                         | Default value                                                                |
+| --------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| dms_repo_url    | URL for **compose.yaml** & **mailserver.env** retrieval.            | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
+| dms_install_dir | Target directory for installation of files, configs, mail data etc. | /srv/mail                                                                    |
 
 ## Dependencies
 None.
