@@ -8,6 +8,7 @@ Docker and the Compose plugin need to be already installed on the server. You co
 Available variables are listed below, along with default values (see defaults/main.yml):
 | Variable        | Description                                                                                                                    | Default value                                                                |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| dms_hostname    | The FQDN to use for your mailserver in the **compose.yaml**.                                                                   | -                                                                            |
 | dms_repo_url    | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
 | dms_install_dir | Target directory for installation of files, configs, mail data etc.                                                            | /srv/mail                                                                    |
 | dms_env_vars    | Dict specifying config for [mailserver.env](https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/). | (see [defaults/main.yml](defaults/main.yml))                                 |

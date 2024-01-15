@@ -31,3 +31,11 @@
     regexp: "^{{ item.key }}=.*"
     line: "{{ item.key }}={{ item.value }}"
   loop: "{{ dms_env_vars | dict2items }}"
+
+- name: Configure hostname in compose.yaml
+  ansible.builtin.lineinfile:
+    path: "{{ dms_install_dir }}/compose.yaml"
+    regexp: '^(\s*)hostname:.*'
+    line: '\1hostname: {{ dms_hostname }}'
+    state: present
+    backrefs: yes
