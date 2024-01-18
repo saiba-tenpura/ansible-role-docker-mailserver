@@ -61,11 +61,12 @@
     state: present
   register: compose_output
 
-- name: Get mailserver container id
-  ansible.builtin.set_fact:
-    mailserver_id: "{{ item.ID }}"
-  loop: "{{ compose_output.containers }}"
-  when: item.Name == "mailserver"
+- name: Add email accounts
+  community.docker.docker_container_exec:
+    container: mailserver
+    command: /bin/bash -c "setup email add {{ item.email }} {{ item.password }}"
+  loop: "{{ dms_accounts }}"
+  when: dms_accounts | length > 0
 
 - name: Shut down containers
   community.docker.docker_compose_v2:
