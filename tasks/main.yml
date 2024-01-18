@@ -55,10 +55,6 @@
     replace: '\1cap_add:\n\2  - NET_ADMIN'
   when: not fail2ban_enabled.changed
 
-# Waiting for merge of https://github.com/ansible-collections/community.docker/commit/ab73061a5f2bb2037f3b5ec39035f540aedb1997
-- name: Workaround compose file name issue
-  ansible.builtin.command: "mv {{ dms_install_dir }}/compose.yaml {{ dms_install_dir }}/docker-compose.yaml"
-
 - name: Start up containers
   community.docker.docker_compose_v2:
     project_src: "{{ dms_install_dir }}"

@@ -16,7 +16,7 @@ Available variables are listed below, along with default values (see defaults/ma
 ## Dependencies
 This role requires the latest release candidate for the community.docker collection.
 ```
-ansible-galaxy collection install community.docker:3.6.0-b2
+ansible-galaxy collection install community.docker:3.6.0-rc1
 ```
 
 ## Example Playbook
