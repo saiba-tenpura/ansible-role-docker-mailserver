@@ -68,6 +68,12 @@
   loop: "{{ dms_accounts }}"
   when: dms_accounts | length > 0
 
+- name: Generate DKIM key
+  community.docker.docker_container_exec:
+    container: mailserver
+    command: /bin/bash -c "setup config dkim keysize {{ dms_dkim_keysize }}"
+  when: dms_accounts | length > 0
+
 - name: Shut down containers
   community.docker.docker_compose_v2:
     project_src: "{{ dms_install_dir }}"

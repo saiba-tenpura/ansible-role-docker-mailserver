@@ -6,3 +6,5 @@ dms_env_vars:
   SPOOF_PROTECTION: 1
 
 dms_accounts: []
+
+dms_dkim_keysize: 2048
