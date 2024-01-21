@@ -16,9 +16,9 @@ Available variables are listed below, along with default values (see defaults/ma
 | dms_repo_url     | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
 
 ## Dependencies
-This role requires the latest release candidate for the community.docker collection to work.
+This role requires the installation of the community.docker (>=3.6.0) collection to work.
 ```
-ansible-galaxy collection install community.docker:3.6.0-rc1
+ansible-galaxy collection install community.docker
 ```
 
 ## Example Playbook
