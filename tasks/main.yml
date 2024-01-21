@@ -68,6 +68,7 @@
     line: '{{ item.email }}'
     state: present
   check_mode: true
+  no_log: true
   register: emails_exist
   loop: "{{ dms_accounts }}"
   when: dms_accounts | length > 0
@@ -76,6 +77,7 @@
   community.docker.docker_container_exec:
     container: mailserver
     command: /bin/bash -c "setup email add {{ item.email }} {{ item.password }}"
+  no_log: true
   loop: "{{ dms_accounts }}"
   loop_control:
     index_var: index
@@ -85,6 +87,7 @@
   community.docker.docker_container_exec:
     container: mailserver
     command: /bin/bash -c "setup email update {{ item.email }} {{ item.password }}"
+  no_log: true
   loop: "{{ dms_accounts }}"
   loop_control:
     index_var: index
