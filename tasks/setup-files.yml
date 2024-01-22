@@ -1,0 +1,27 @@
+---
+- name: Setup install dir
+  ansible.builtin.file:
+    path: "{{ dms_install_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Download compose & env file
+  ansible.builtin.get_url:
+    url: "{{ dms_repo_url }}/{{ item }}"
+    dest: "{{ dms_install_dir }}"
+    mode: "0644"
+  loop:
+    - compose.yaml
+    - mailserver.env
+
+- name: Setup volume directories
+  ansible.builtin.file:
+    path: "{{ dms_install_dir }}/docker-data/dms/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - mail-data
+    - mail-state
+    - mail-logs
+    - config
+

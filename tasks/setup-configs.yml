@@ -1,0 +1,31 @@
+---
+- name: Configure mailserver.env
+  ansible.builtin.lineinfile:
+    path: "{{ dms_install_dir }}/mailserver.env"
+    regexp: "^{{ item.key }}=.*"
+    line: "{{ item.key }}={{ item.value }}"
+  loop: "{{ dms_env_vars | dict2items }}"
+
+- name: Configure hostname in compose.yaml
+  ansible.builtin.lineinfile:
+    path: "{{ dms_install_dir }}/compose.yaml"
+    regexp: '^(\s*)hostname:.*'
+    line: '\1hostname: {{ dms_hostname }}'
+    state: present
+    backrefs: true
+
+- name: Check if fail2ban is enabled
+  ansible.builtin.lineinfile:
+    path: "{{ dms_install_dir }}/mailserver.env"
+    line: "ENABLE_FAIL2BAN=1"
+    state: present
+  check_mode: true
+  register: fail2ban_enabled
+
+- name: Add NET_ADMIN capability for fail2ban
+  ansible.builtin.replace:
+    path: "{{ dms_install_dir }}/compose.yaml"
+    regexp: '(\s+)# cap_add:\n(\s+)#   - NET_ADMIN'
+    replace: '\1cap_add:\n\2  - NET_ADMIN'
+  when: not fail2ban_enabled.changed
+

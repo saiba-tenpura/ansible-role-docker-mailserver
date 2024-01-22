@@ -1,0 +1,49 @@
+---
+- name: Start up containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ dms_install_dir }}"
+    state: present
+  register: compose_output
+
+- name: Check existance of email accounts
+  ansible.builtin.lineinfile:
+    path: "{{ dms_install_dir }}/docker-data/dms/config/postfix-accounts.cf"
+    search_string: '{{ item.email }}'
+    line: '{{ item.email }}'
+    state: present
+  check_mode: true
+  no_log: true
+  register: emails_exist
+  loop: "{{ dms_accounts }}"
+  when: dms_accounts | length > 0
+
+- name: Add new email accounts
+  community.docker.docker_container_exec:
+    container: mailserver
+    command: /bin/bash -c "setup email add {{ item.email }} {{ item.password }}"
+  no_log: true
+  loop: "{{ dms_accounts }}"
+  loop_control:
+    index_var: index
+  when: emails_exist.results[index].msg == "line added"
+
+- name: Update existing email accounts
+  community.docker.docker_container_exec:
+    container: mailserver
+    command: /bin/bash -c "setup email update {{ item.email }} {{ item.password }}"
+  no_log: true
+  loop: "{{ dms_accounts }}"
+  loop_control:
+    index_var: index
+  when: emails_exist.results[index].msg == "line replaced"
+
+- name: Generate DKIM key
+  community.docker.docker_container_exec:
+    container: mailserver
+    command: /bin/bash -c "setup config dkim keysize {{ dms_dkim_keysize }}"
+  when: dms_accounts | length > 0
+
+- name: Shut down containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ dms_install_dir }}"
+    state: absent
