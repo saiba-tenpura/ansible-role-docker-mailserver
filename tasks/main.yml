@@ -1,6 +1,9 @@
 ---
-- import_tasks: setup-files.yml
+- name: Setup basic files & directory structure
+  ansible.builtin.import_tasks: setup-files.yml
 
-- import_tasks: setup-configs.yml
+- name: Setup configuration
+  ansible.builtin.import_tasks: setup-configs.yml
 
-- import_tasks: setup-containers.yml
+- name: Setup containers
+  ansible.builtin.import_tasks: setup-containers.yml

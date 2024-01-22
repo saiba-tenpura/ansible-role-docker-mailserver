@@ -28,4 +28,3 @@
     regexp: '(\s+)# cap_add:\n(\s+)#   - NET_ADMIN'
     replace: '\1cap_add:\n\2  - NET_ADMIN'
   when: not fail2ban_enabled.changed
-
