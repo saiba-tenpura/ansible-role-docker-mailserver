@@ -37,11 +37,10 @@
     index_var: index
   when: emails_exist.results[index].msg == "line replaced"
 
-- name: Generate DKIM key
+- name: Generate DKIM keys
   community.docker.docker_container_exec:
     container: mailserver
     command: /bin/bash -c "setup config dkim keysize {{ dms_dkim_keysize }}"
-  when: dms_accounts | length > 0
 
 - name: Shut down containers
   community.docker.docker_compose_v2:
