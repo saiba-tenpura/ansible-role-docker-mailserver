@@ -1,0 +1,55 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for the docker-mailserver role.
+    author:
+      - Saiba Tenpura
+    options:
+      dms_hostname:
+        type: str
+        required: true
+        description: Hostname used by the docker mailserver instance.
+
+      dms_repo_url:
+        type: str
+        required: false
+        default: https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master
+        description: URL for compose.yaml & mailserver.env retrieval.
+
+      dms_install_dir:
+        type: path
+        required: false
+        default: /srv/mail
+        description: Target directory for installation of files, configs and mail data.
+
+      dms_dkim_keysize:
+        type: int
+        choices:
+          - 1024
+          - 2048
+          - 4096
+        required: false
+        default: 2048
+        description: Keysize for the DKIM key generation.
+
+      dms_env_vars:
+        type: dict
+        required: false
+        default: {}
+        description: Dict specifying config for mailserver.env. (See https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/)
+
+      dms_accounts:
+        type: list
+        elements: dict
+        required: false
+        default: []
+        description: List of email accounts to be added/updated.
+        options:
+          email:
+            type: str
+            required: true
+            description: E-Mail of the account.
+          password:
+            type: str
+            required: true
+            description: Password of the account.
