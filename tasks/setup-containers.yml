@@ -5,7 +5,7 @@
     state: present
   register: compose_output
 
-- name: Check existance of email accounts
+- name: Register existance of email accounts
   ansible.builtin.lineinfile:
     path: "{{ dms_install_dir }}/docker-data/dms/config/postfix-accounts.cf"
     search_string: '{{ item.email }}'

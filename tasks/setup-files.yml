@@ -24,3 +24,9 @@
     - mail-state
     - mail-logs
     - config
+
+- name: Setup mail accounts config
+  ansible.builtin.file:
+    path: "{{ dms_install_dir }}/docker-data/dms/config/postfix-accounts.cf"
+    state: touch
+    mode: "0644"
