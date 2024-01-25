@@ -3,6 +3,10 @@ dms_repo_url: https://raw.githubusercontent.com/docker-mailserver/docker-mailser
 dms_install_dir: /srv/mail
 dms_dkim_keysize: 2048
 
+dms_ssl_provider: traefik
+dms_ssl_email: admin@example.com
+dms_ssl_cert_path: ./docker-data/traefik/acme.json
+
 dms_env_vars: {}
 
 dms_accounts: []

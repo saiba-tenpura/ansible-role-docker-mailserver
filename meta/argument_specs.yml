@@ -32,6 +32,26 @@ argument_specs:
         default: 2048
         description: Keysize for the DKIM key generation.
 
+      dms_ssl_provider:
+        type: str
+        required: false
+        default: traefik
+        choices:
+          - traefik
+        description: Additional service to setup & use for certificate provisioning.
+
+      dms_ssl_email:
+        type: str
+        required: false
+        default: admin@example.com
+        description: Email used for certificate provisioning.
+
+      dms_ssl_cert_path:
+        type: path
+        required: false
+        default: ./docker-data/traefik/acme.json
+        description: Storage path for the acme.json.
+
       dms_env_vars:
         type: dict
         required: false

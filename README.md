@@ -6,14 +6,17 @@ Docker and the Compose v2 plugin need to be already installed on the server. You
 
 ## Role Variables
 Available variables are listed below, along with default values (see defaults/main.yml):
-| Variable         | Description                                                                                                                    | Default value                                                                |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| dms_hostname     | The FQDN to use for your mailserver in the **compose.yaml**.                                                                   | -                                                                            |
-| dms_accounts     | List of email accounts of the mailserver. New ones are added and already existing ones are updated.                            | []                                                                           |
-| dms_env_vars     | Dict specifying config for [mailserver.env](https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/). | {}                                                                           |
-| dms_install_dir  | Target directory for installation of files, configs, mail data etc.                                                            | /srv/mail                                                                    |
-| dms_dkim_keysize | Keysize for the DKIM key generation.                                                                                           | 2048                                                                         |
-| dms_repo_url     | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
+| Variable          | Description                                                                                                                    | Default value                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| dms_hostname      | The FQDN to use for your mailserver in the **compose.yaml**.                                                                   | -                                                                            |
+| dms_accounts      | List of email accounts of the mailserver. New ones are added and already existing ones are updated.                            | []                                                                           |
+| dms_env_vars      | Dict specifying config for [mailserver.env](https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/). | {}                                                                           |
+| dms_install_dir   | Target directory for installation of files, configs, mail data etc.                                                            | /srv/mail                                                                    |
+| dms_ssl_provider  | Additional service to setup & use for certificate provisioning.                                                                | traefik                                                                      |
+| dms_ssl_email     | Email used for certificate provisioning.                                                                                       | admin@example.com                                                            |
+| dms_ssl_cert_path | Storage path for the acme.json.                                                                                                | ./docker-data/traefik/acme.json                                              |
+| dms_dkim_keysize  | Keysize for the DKIM key generation.                                                                                           | 2048                                                                         |
+| dms_repo_url      | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
 
 ## Dependencies
 This role requires the installation of the community.docker (>=3.6.0) collection to work.

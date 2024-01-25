@@ -1,0 +1,19 @@
+  reverse-proxy:
+    image: docker.io/traefik:latest
+    container_name: docker-traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    command:
+      - --providers.docker
+      - --entrypoints.http.address=:80
+      - --entrypoints.http.http.redirections.entryPoint.to=https
+      - --entrypoints.http.http.redirections.entryPoint.scheme=https
+      - --entrypoints.https.address=:443
+      - --entrypoints.https.http.tls.certResolver=letsencrypt
+      - --certificatesresolvers.letsencrypt.acme.email={{ dms_ssl_email }}
+      - --certificatesresolvers.letsencrypt.acme.storage=/acme.json
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=http
+    volumes:
+      - {{ dms_ssl_cert_path }}:/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock:ro
