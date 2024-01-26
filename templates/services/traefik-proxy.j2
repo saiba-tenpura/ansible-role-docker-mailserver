@@ -10,10 +10,10 @@
       - --entrypoints.http.http.redirections.entryPoint.to=https
       - --entrypoints.http.http.redirections.entryPoint.scheme=https
       - --entrypoints.https.address=:443
-      - --entrypoints.https.http.tls.certResolver=letsencrypt
+      - --entrypoints.https.http.tls.certResolver=letsEncrypt
       - --certificatesresolvers.letsencrypt.acme.email={{ dms_ssl_email }}
       - --certificatesresolvers.letsencrypt.acme.storage=/acme.json
       - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=http
     volumes:
-      - {{ dms_ssl_cert_path }}:/acme.json
+      - {{ dms_ssl_path }}:/acme.json
       - /var/run/docker.sock:/var/run/docker.sock:ro

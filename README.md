@@ -12,9 +12,9 @@ Available variables are listed below, along with default values (see defaults/ma
 | dms_accounts      | List of email accounts of the mailserver. New ones are added and already existing ones are updated.                            | []                                                                           |
 | dms_env_vars      | Dict specifying config for [mailserver.env](https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/). | {}                                                                           |
 | dms_install_dir   | Target directory for installation of files, configs, mail data etc.                                                            | /srv/mail                                                                    |
-| dms_ssl_provider  | Additional service to setup & use for certificate provisioning.                                                                | traefik                                                                      |
-| dms_ssl_email     | Email used for certificate provisioning.                                                                                       | admin@example.com                                                            |
-| dms_ssl_cert_path | Storage path for the acme.json.                                                                                                | ./docker-data/traefik/acme.json                                              |
+| dms_ssl_provider  | Additional service to setup & use for certificate provisioning.                                                                |                                                                              |
+| dms_ssl_email     | Email used for certificate provisioning.                                                                                       |                                                                              |
+| dms_ssl_path      | Storage path for the certificate data.                                                                                         |                                                                              |
 | dms_dkim_keysize  | Keysize for the DKIM key generation.                                                                                           | 2048                                                                         |
 | dms_repo_url      | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
 
@@ -35,6 +35,8 @@ ansible-galaxy collection install community.docker
         dms_env_vars:
           ENABLE_FAIL2BAN: 1
           SPOOF_PROTECTION: 1
+        dms_ssl_provider: traefik
+        dms_ssl_email: admin@example.com
       roles:
         - role: saiba-tenpura.docker-mailserver
 ```

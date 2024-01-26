@@ -35,22 +35,19 @@ argument_specs:
       dms_ssl_provider:
         type: str
         required: false
-        default: traefik
-        choices:
-          - traefik
         description: Additional service to setup & use for certificate provisioning.
 
       dms_ssl_email:
         type: str
         required: false
-        default: admin@example.com
+        default:
         description: Email used for certificate provisioning.
 
-      dms_ssl_cert_path:
+      dms_ssl_path:
         type: path
         required: false
-        default: ./docker-data/traefik/acme.json
-        description: Storage path for the acme.json.
+        default:
+        description: Storage path for the certificate data.
 
       dms_env_vars:
         type: dict

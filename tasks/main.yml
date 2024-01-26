@@ -5,5 +5,9 @@
 - name: Setup compose configuration
   ansible.builtin.import_tasks: setup-compose.yml
 
+- name: Setup SSL provider
+  ansible.builtin.import_tasks: ssl-provider.yml
+  when: dms_ssl_provider
+
 - name: Setup containers
   ansible.builtin.import_tasks: setup-containers.yml
