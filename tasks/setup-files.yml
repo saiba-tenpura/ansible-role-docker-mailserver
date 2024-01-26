@@ -30,3 +30,10 @@
     path: "{{ dms_install_dir }}/docker-data/dms/config/postfix-accounts.cf"
     state: touch
     mode: "0644"
+
+- name: Configure mailserver.env
+  ansible.builtin.lineinfile:
+    path: "{{ dms_install_dir }}/mailserver.env"
+    regexp: "^{{ item.key }}=.*"
+    line: "{{ item.key }}={{ item.value }}"
+  loop: "{{ dms_env_vars | dict2items }}"
