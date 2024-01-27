@@ -3,6 +3,8 @@ dms_ssl_defaults:
   traefik:
     source_path: ./docker-data/traefik/acme.json
     target_path: /etc/letsencrypt/acme.json:ro
+    requires_email: true
   traefik-external:
     source_path: /srv/www/traefik/acme.json
     target_path: /etc/letsencrypt/acme.json:ro
+    requires_email: false

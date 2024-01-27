@@ -1,4 +1,14 @@
 ---
+- name: Validate SSL provider choice
+  ansible.builtin.fail:
+    msg: "Value of dms_ssl_provider must be one of: {{ dms_ssl_defaults.keys() | join(', ') }} got {{ dms_ssl_provider }}"
+  when: dms_ssl_provider not in dms_ssl_defaults.keys()
+
+- name: Validate SSL provider requires email
+  ansible.builtin.fail:
+    msg: "Value of dms_ssl_email must be set in order to use SSL provider: {{ dms_ssl_provider }}"
+  when: not dms_ssl_email and dms_ssl_defaults[dms_ssl_provider].requires_email
+
 - name: Set SSL path to default
   ansible.builtin.set_fact:
     dms_ssl_path: "{{ dms_ssl_defaults[dms_ssl_provider].source_path }}"
