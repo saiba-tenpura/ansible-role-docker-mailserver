@@ -1,13 +1,10 @@
 ---
 - name: Setup basic files & directory structure
-  ansible.builtin.import_tasks: setup-files.yml
-
-- name: Setup compose configuration
-  ansible.builtin.import_tasks: setup-compose.yml
+  ansible.builtin.import_tasks: install.yml
 
 - name: Setup SSL provider
-  ansible.builtin.import_tasks: ssl-provider.yml
+  ansible.builtin.import_tasks: setup-ssl.yml
   when: dms_ssl_provider
 
-- name: Setup containers
-  ansible.builtin.import_tasks: setup-containers.yml
+- name: Setup configuration & containers
+  ansible.builtin.import_tasks: configure.yml
