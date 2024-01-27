@@ -1,2 +1,8 @@
 ---
-# vars file for saiba-tenpura.docker_mailserver
+dms_ssl_defaults:
+  traefik:
+    source_path: ./docker-data/traefik/acme.json
+    target_path: /etc/letsencrypt/acme.json:ro
+  traefik-external:
+    source_path: /srv/www/traefik/acme.json
+    target_path: /etc/letsencrypt/acme.json:ro
