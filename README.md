@@ -1,5 +1,5 @@
 # Ansible Role: Docker Mailserver (WIP)
-Installs a [docker mailserver](https://github.com/docker-mailserver/docker-mailserver) instance.
+Installs a [docker mailserver](https://github.com/docker-mailserver/docker-mailserver) instance based on the official documentation.
 
 ## Requirements
 Docker and the Compose v2 plugin need to be already installed on the server. You could use [this](https://github.com/geerlingguy/ansible-role-docker) ansible role to do so.
@@ -12,11 +12,17 @@ Available variables are listed below, along with default values (see defaults/ma
 | dms_accounts      | List of email accounts of the mailserver. New ones are added and already existing ones are updated.                            | []                                                                           |
 | dms_env_vars      | Dict specifying config for [mailserver.env](https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/). | {}                                                                           |
 | dms_install_dir   | Target directory for installation of files, configs, mail data etc.                                                            | /srv/mail                                                                    |
-| dms_ssl_provider  | Additional service to setup & use for certificate provisioning.                                                                |                                                                              |
+| dms_ssl_provider  | Additional service to setup & use for certificate provisioning. Not added by default for options look [here](#ssl-providers).  |                                                                              |
 | dms_ssl_email     | Email used for certificate provisioning.                                                                                       |                                                                              |
 | dms_ssl_path      | Storage path for the certificate data.                                                                                         |                                                                              |
 | dms_dkim_keysize  | Keysize for the DKIM key generation.                                                                                           | 2048                                                                         |
 | dms_repo_url      | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
+
+### SSL Providers
+| Option           | Description                                                                                                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| traefik          | Adds additional Traefik and Whoami services to the setup. Based on [this](https://docker-mailserver.github.io/docker-mailserver/latest/config/security/ssl/#traefik-v2) |
+| traefik-external | Adds an Whoami service with Traefik labels to the setup which is using a separate Traefik instance provided by you.                                                     |
 
 ## Dependencies
 This role requires the installation of the community.docker (>=3.6.0) collection to work.
