@@ -22,7 +22,7 @@ Available variables are listed below, along with default values (see defaults/ma
 | Option           | Description                                                                                                                                                             |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | traefik          | Adds additional Traefik and Whoami services to the setup. Based on [this](https://docker-mailserver.github.io/docker-mailserver/latest/config/security/ssl/#traefik-v2) |
-| traefik-external | Adds an Whoami service with Traefik labels to the setup which is using a separate Traefik instance provided by you.                                                     |
+| traefik-external | Adds an Whoami service with additional labels to utilize a separate Traefik instance via a shared network.                                                              |
 
 ## Dependencies
 This role requires the installation of the community.docker (>=3.6.0) collection to work.

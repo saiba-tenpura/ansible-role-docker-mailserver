@@ -2,3 +2,8 @@
 {% include './templates/services/whoami-traefik.j2' %}
       - "traefik.http.routers.whoami.tls=true"
       - "traefik.http.routers.whoami.tls.certResolver=letsEncrypt"
+
+networks:
+  default:
+    name: proxy-network
+    external: true
