@@ -15,6 +15,7 @@ Available variables are listed below, along with default values (see defaults/ma
 | dms_ssl_provider  | Additional service to setup & use for certificate provisioning. Not added by default for options look [here](#ssl-providers).  |                                                                              |
 | dms_ssl_email     | Email used for certificate provisioning.                                                                                       |                                                                              |
 | dms_ssl_path      | Storage path for the certificate data.                                                                                         |                                                                              |
+| dms_compose_state | Target state for compose services after the rollout has been completed.                                                        | present                                                                      |
 | dms_dkim_keysize  | Keysize for the DKIM key generation.                                                                                           | 2048                                                                         |
 | dms_repo_url      | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
 

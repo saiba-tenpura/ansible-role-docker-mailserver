@@ -64,7 +64,7 @@
     container: mailserver
     command: /bin/bash -c "setup config dkim keysize {{ dms_dkim_keysize }}"
 
-- name: Shut down containers
+- name: Change compose state
   community.docker.docker_compose_v2:
     project_src: "{{ dms_install_dir }}"
-    state: absent
+    state: "{{ dms_compose_state }}"

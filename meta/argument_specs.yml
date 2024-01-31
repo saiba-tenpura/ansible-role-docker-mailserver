@@ -22,6 +22,17 @@ argument_specs:
         default: /srv/mail
         description: Target directory for installation of files, configs and mail data.
 
+      dms_compose_state:
+        type: str
+        choices:
+          - present
+          - restarted
+          - stopped
+          - absent
+        required: false
+        default: present
+        description: Target state for compose services after the rollout has been completed.
+
       dms_dkim_keysize:
         type: int
         choices:
