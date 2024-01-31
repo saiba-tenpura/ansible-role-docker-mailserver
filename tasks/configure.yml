@@ -42,7 +42,7 @@
 - name: Add new email accounts
   community.docker.docker_container_exec:
     container: mailserver
-    command: /bin/bash -c "setup email add {{ item.email }} {{ item.password }}"
+    command: /bin/bash -c "setup email add {{ item.email }} '{{ item.password }}'"
   no_log: true
   loop: "{{ dms_accounts }}"
   loop_control:
@@ -52,7 +52,7 @@
 - name: Update existing email accounts
   community.docker.docker_container_exec:
     container: mailserver
-    command: /bin/bash -c "setup email update {{ item.email }} {{ item.password }}"
+    command: /bin/bash -c "setup email update {{ item.email }} '{{ item.password }}'"
   no_log: true
   loop: "{{ dms_accounts }}"
   loop_control:
