@@ -33,19 +33,20 @@ ansible-galaxy collection install community.docker
 
 ## Example Playbook
 ```
-    - hosts: servers
-      vars:
-        dms_hostname: mail.example.com
-        dms_accounts:
-          - email: user@example.com
-            password: eX@mPl3_p4$5w0rd
-        dms_env_vars:
-          ENABLE_FAIL2BAN: 1
-          SPOOF_PROTECTION: 1
-        dms_ssl_provider: traefik
-        dms_ssl_email: admin@example.com
-      roles:
-        - role: saiba-tenpura.docker-mailserver
+- hosts: servers
+  vars:
+    dms_hostname: mail.example.com
+    # Ideally you would store these via ansible-vault
+    dms_accounts:
+      - email: user@example.com
+        password: eX@mPl3_p4$5w0rd
+    dms_env_vars:
+      ENABLE_FAIL2BAN: 1
+      SPOOF_PROTECTION: 1
+    dms_ssl_provider: traefik
+    dms_ssl_email: admin@example.com
+  roles:
+    - role: saiba-tenpura.docker-mailserver
 ```
 
 ## License
