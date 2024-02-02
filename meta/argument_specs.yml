@@ -76,8 +76,13 @@ argument_specs:
           email:
             type: str
             required: true
-            description: E-Mail of the account.
+            description: Email of the account.
           password:
             type: str
             required: true
             description: Password of the account.
+          aliases:
+            type: list
+            elements: str
+            required: false
+            description: Additional email aliases of the account.

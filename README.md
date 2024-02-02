@@ -9,7 +9,7 @@ Available variables are listed below, along with default values (see defaults/ma
 | Variable          | Description                                                                                                                    | Default value                                                                |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
 | dms_hostname      | The FQDN to use for your mailserver in the **compose.yaml**.                                                                   | -                                                                            |
-| dms_accounts      | List of email accounts of the mailserver. New ones are added and already existing ones are updated.                            | []                                                                           |
+| dms_accounts      | List of email accounts and aliases to add to the mailserver.                                                                   | []                                                                           |
 | dms_env_vars      | Dict specifying config for [mailserver.env](https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/). | {}                                                                           |
 | dms_install_dir   | Target directory for installation of files, configs, mail data etc.                                                            | /srv/mail                                                                    |
 | dms_ssl_provider  | Additional service to setup & use for certificate provisioning. Not added by default for options look [here](#ssl-providers).  |                                                                              |
@@ -36,10 +36,13 @@ ansible-galaxy collection install community.docker
 - hosts: servers
   vars:
     dms_hostname: mail.example.com
-    # Ideally you would store these via ansible-vault
+    # BEWARE: Accounts and aliases are managed by ansible and are not be manually modified.
+    # You should ideally store the credentials via ansible-vault.
     dms_accounts:
       - email: user@example.com
         password: eX@mPl3_p4$5w0rd
+        aliases:
+          - dmarc.report@example.com
     dms_env_vars:
       ENABLE_FAIL2BAN: 1
       SPOOF_PROTECTION: 1

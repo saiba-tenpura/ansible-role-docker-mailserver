@@ -1,21 +1,13 @@
 ---
-- name: Register existance of email account
-  ansible.builtin.lineinfile:
-    path: "{{ dms_install_dir }}/docker-data/dms/config/postfix-accounts.cf"
-    search_string: '{{ item.email }}'
-    line: '{{ item.email }}'
-    state: present
-  check_mode: true
-  register: account_exists
-
 - name: Add new email account
   community.docker.docker_container_exec:
     container: mailserver
     command: /bin/bash -c "setup email add {{ item.email }} '{{ item.password }}'"
-  when: account_exists.msg == "line added"
 
-- name: Update existing email account
+- name: Add aliases for email account
   community.docker.docker_container_exec:
     container: mailserver
-    command: /bin/bash -c "setup email update {{ item.email }} '{{ item.password }}'"
-  when: account_exists.msg == "line replaced"
+    command: /bin/bash -c "setup alias add {{ alias }} {{ item.email }}"
+  loop: "{{ item.aliases }}"
+  loop_control:
+    loop_var: alias
