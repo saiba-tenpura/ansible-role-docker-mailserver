@@ -1,0 +1,27 @@
+services:
+  mailserver:
+    hostname: {{ dms_hostname }}
+{% if dms_ssl_provider %}
+    volumes:
+      - {{ dms_ssl_path }}:{{ dms_ssl_defaults[dms_ssl_provider].target_path }}
+{% endif %}
+{% if dms_env_vars.get('ENABLE_FAIL2BAN') == 1 %}
+    cap_add:
+      - NET_ADMIN
+{% endif %}
+{% if dms_ssl_provider %}
+  {% if dms_ssl_provider == 'traefik' %}
+    {% include './templates/services/traefik-proxy.j2' %}
+  {% endif %}
+  {% if dms_ssl_provider in ('traefik', 'traefik-external') +%}
+    {% include './templates/services/whoami.j2' %}
+  {% endif %}
+{% endif %}
+
+{% if dms_ssl_provider == 'traefik-external' %}
+networks:
+  {% if dms_ssl_provider == 'traefik-external' %}
+  proxy-network:
+    external: true
+  {% endif %}
+{% endif %}

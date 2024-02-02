@@ -1,5 +1,0 @@
-  whoami:
-    image: docker.io/traefik/whoami:latest
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`{{ dms_env_vars['SSL_DOMAIN'] }}`)"

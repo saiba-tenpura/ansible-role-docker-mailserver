@@ -13,16 +13,3 @@
   ansible.builtin.set_fact:
     dms_ssl_path: "{{ dms_ssl_defaults[dms_ssl_provider].source_path }}"
   when: not dms_ssl_path
-
-- name: Add certificate volume
-  ansible.builtin.lineinfile:
-    insertafter: ".*volumes:$"
-    path: "{{ dms_install_dir }}/compose.yaml"
-    line: "      - {{ dms_ssl_path }}:{{ dms_ssl_defaults[dms_ssl_provider].target_path }}"
-    state: present
-
-- name: Add SSL provider block
-  ansible.builtin.blockinfile:
-    path: "{{ dms_install_dir }}/compose.yaml"
-    marker: ""
-    block: "{{ lookup('ansible.builtin.template', './providers/' + dms_ssl_provider + '.j2') }}"
