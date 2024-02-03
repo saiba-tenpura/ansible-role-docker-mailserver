@@ -29,8 +29,8 @@
   ansible.builtin.copy:
     content: ""
     dest: "{{ dms_install_dir }}/docker-data/dms/config/{{ item }}"
-    force: yes
+    force: true
     mode: "0644"
   loop:
-   - postfix-accounts.cf
-   - postfix-virtual.cf
+    - postfix-accounts.cf
+    - postfix-virtual.cf

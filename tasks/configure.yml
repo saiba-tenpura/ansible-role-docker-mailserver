@@ -10,7 +10,7 @@
   ansible.builtin.template:
     src: compose.override.j2
     dest: "{{ dms_install_dir }}/compose.override.yaml"
-    lstrip_blocks: yes
+    lstrip_blocks: true
     mode: "0644"
 
 - name: Start up containers
