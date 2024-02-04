@@ -43,6 +43,18 @@ argument_specs:
         default: 2048
         description: Keysize for the DKIM key generation.
 
+      dms_ipv6_enable:
+        type: bool
+        required: false
+        default: false
+        description: When enabled it adds an IPv6 network to the mailserver container.
+
+      dms_ipv6_subnet:
+        type: str
+        required: false
+        default: fd00:cafe:face:feed::/64
+        description: IPv6 subnet used for the mailserver container.
+
       dms_ssl_provider:
         type: str
         required: false

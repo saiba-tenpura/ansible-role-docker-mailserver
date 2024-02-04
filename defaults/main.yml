@@ -4,9 +4,11 @@ dms_install_dir: /srv/mail
 dms_compose_state: present
 dms_dkim_keysize: 2048
 
+dms_accounts: []
 dms_env_vars: {}
 
-dms_accounts: []
+dms_ipv6_enable: false
+dms_ipv6_subnet: fd00:cafe:face:feed::/64
 
 dms_ssl_provider:
 dms_ssl_email:

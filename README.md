@@ -12,12 +12,19 @@ Available variables are listed below, along with default values (see defaults/ma
 | dms_accounts      | List of email accounts and aliases to add to the mailserver.                                                                   | []                                                                           |
 | dms_env_vars      | Dict specifying config for [mailserver.env](https://docker-mailserver.github.io/docker-mailserver/latest/config/environment/). | {}                                                                           |
 | dms_install_dir   | Target directory for installation of files, configs, mail data etc.                                                            | /srv/mail                                                                    |
+| dms_ipv6_enable   | When enabled it adds an IPv6 network to the mailserver container.                                                              | false                                                                        |
+| dms_ipv6_subnet   | IPv6 subnet used for the mailserver container.                                                                                | fd00:cafe:face:feed::/64                                                     |
 | dms_ssl_provider  | Additional service to setup & use for certificate provisioning. Not added by default for options look [here](#ssl-providers).  |                                                                              |
 | dms_ssl_email     | Email used for certificate provisioning.                                                                                       |                                                                              |
 | dms_ssl_path      | Storage path for the certificate data.                                                                                         |                                                                              |
 | dms_compose_state | Target state for compose services after the rollout has been completed.                                                        | present                                                                      |
 | dms_dkim_keysize  | Keysize for the DKIM key generation.                                                                                           | 2048                                                                         |
 | dms_repo_url      | URL for **compose.yaml** & **mailserver.env** retrieval.                                                                       | https://raw.githubusercontent.com/docker-mailserver/docker-mailserver/master |
+
+### IPv6
+Before enabling IPv6 support you should first read the [official documentation](https://docker-mailserver.github.io/docker-mailserver/edge/config/advanced/ipv6/) on the topic in order to understand the consequences of an improper configuration and why you may or may not want to enable it.
+
+Please also make sure you made the necessary adjustments in your Docker daemon.json to enable IPv6 support.
 
 ### SSL Providers
 | Option           | Description                                                                                                                                                             |
