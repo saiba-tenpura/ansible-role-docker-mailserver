@@ -59,6 +59,13 @@ ansible-galaxy collection install community.docker
     - role: saiba-tenpura.docker-mailserver
 ```
 
+## Post-Installation Steps
+After your installation has finished make sure to verify the following:
+* Add the [baseline DNS entries](https://docker-mailserver.github.io/docker-mailserver/latest/usage/#minimal-dns-setup) (MX, A, PTR) which are necessary for your mailserver to function.
+* Based on your chosen configuration/setup add [additional DNS entries](https://docker-mailserver.github.io/docker-mailserver/latest/config/best-practices/dkim_dmarc_spf/) (DKIM, DMARC, SPF) to increase security.
+* Adjust your firewall configuration to allow access via the [necessary ports](https://docker-mailserver.github.io/docker-mailserver/latest/config/security/understanding-the-ports/#overview-of-email-ports).
+* Ensure everything is working correctly by using the testing tools found [here](https://docker-mailserver.github.io/docker-mailserver/latest/usage/#testing).
+
 ## License
 MIT
 
