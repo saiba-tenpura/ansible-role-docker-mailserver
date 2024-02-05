@@ -30,8 +30,8 @@ argument_specs:
           - stopped
           - absent
         required: false
-        default: present
-        description: Target state for compose services after the rollout has been completed.
+        default: restarted
+        description: Target state of the docker compose services after the rollout has been completed.
 
       dms_dkim_keysize:
         type: int
