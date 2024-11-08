@@ -1,4 +1,4 @@
-# Ansible Role: Docker Mailserver (WIP)
+# Ansible Role: Docker Mailserver
 Installs a [docker mailserver](https://github.com/docker-mailserver/docker-mailserver) instance based on the official documentation.
 Adjustments to the compose.yaml are handled by generating a custom composer.override.yaml.
 
